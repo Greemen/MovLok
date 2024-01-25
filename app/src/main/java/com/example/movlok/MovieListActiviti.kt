@@ -31,7 +31,7 @@ class MovieListActiviti : AppCompatActivity() {
 
     // Listening for any live data changes - observing
     private fun observeAnyChange() {
-        movieListViewModel.getMovies().observe(this, Observer<List<MovieModel>> { movieModels ->
+        movieListViewModel.movies.observe(this, Observer<List<MovieModel>> { movieModels ->
             // Observing any data Change
         })
     }
