@@ -1,16 +1,18 @@
 package com.example.movlok.repositories
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.example.movlok.models.MovieModel
+import com.example.movlok.request.MovieApiClient
 
 class MovieRepository private constructor() {
-    // Backing property for MutableLiveData
-    private val _movies = MutableLiveData<List<MovieModel>>()
+    // Acts as repositories
 
-    // Public LiveData, exposed as read-only
+    // Lazy initialization of MovieApiClient
+    private val movieApiClient by lazy { MovieApiClient.getInstance() }
+
+    // Exposes the LiveData from MovieApiClient
     val movies: LiveData<List<MovieModel>>
-        get() = _movies
+        get() = movieApiClient.getMovies()
 
     companion object {
         @Volatile
