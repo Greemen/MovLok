@@ -1,15 +1,15 @@
 package com.example.movlok
 
-import android.credentials.CredentialOption
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.example.movlok.models.MovieModel
 import com.example.movlok.request.Servicey
 import com.example.movlok.response.MovieSearchResponse
 import com.example.movlok.utils.Credentials
-import com.example.movlok.utils.MovieApi
+import com.example.movlok.viewmodels.MovieListViewModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -17,20 +17,23 @@ import retrofit2.Response
 
 class MovieListActiviti : AppCompatActivity() {
 
-
+    // ViewModel
+    private lateinit var movieListViewModel: MovieListViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Find the button by its ID
-        val button: Button = findViewById(R.id.button)
+        // Initialize the ViewModel using ViewModelProvider
+        movieListViewModel = ViewModelProvider(this)[MovieListViewModel::class.java]
 
-        // Set up a click listener for the button
-        button.setOnClickListener {
-            Log.v("Tag", "Click")
-            //GetRetrofitResponse()
-            GetRetrofitResponseAccordingToID()
-        }
+
+    }
+
+    // Listening for any live data changes - observing
+    private fun observeAnyChange() {
+        movieListViewModel.getMovies().observe(this, Observer<List<MovieModel>> { movieModels ->
+            // Observing any data Change
+        })
     }
 
     private fun GetRetrofitResponse() {

@@ -42,6 +42,7 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.11.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    implementation("org.chromium.net:cronet-embedded:119.6045.31")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
@@ -50,5 +51,11 @@ dependencies {
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     // Gson
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
-
+    // ViewModel
+    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
+    // LiveData
+    implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.7.0")
+    // If using Java 8 features
+    implementation ("androidx.lifecycle:lifecycle-common-java8:2.7.0")
 }
+
