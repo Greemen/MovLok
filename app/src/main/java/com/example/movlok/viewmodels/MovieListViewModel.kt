@@ -14,4 +14,10 @@ class MovieListViewModel : ViewModel() {
     // Public LiveData, exposed as read-only
     val movies: LiveData<List<MovieModel>>
         get() = movieRepository.movies
+
+    //Calling method in view-model
+
+    public fun searchMovieApi( query: String, pageNumber: Int){
+        movieRepository.searchMovieApi(query, pageNumber)
+    }
 }

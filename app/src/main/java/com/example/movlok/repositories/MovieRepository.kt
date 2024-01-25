@@ -23,4 +23,10 @@ class MovieRepository private constructor() {
                 instance ?: MovieRepository().also { instance = it }
             }
     }
+
+    // Call the method
+    fun searchMovieApi(query: String, pageNumber: Int) {
+        movieApiClient.searchMoviesApi(query, pageNumber)
+    }
 }
+

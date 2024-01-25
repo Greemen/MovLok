@@ -2,17 +2,11 @@ package com.example.movlok
 
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.example.movlok.models.MovieModel
-import com.example.movlok.request.Servicey
-import com.example.movlok.response.MovieSearchResponse
-import com.example.movlok.utils.Credentials
 import com.example.movlok.viewmodels.MovieListViewModel
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 
 class MovieListActiviti : AppCompatActivity() {
@@ -26,16 +20,49 @@ class MovieListActiviti : AppCompatActivity() {
         // Initialize the ViewModel using ViewModelProvider
         movieListViewModel = ViewModelProvider(this)[MovieListViewModel::class.java]
 
+        //Calling the observers
+        ObserveAnyChange();
+
+        // Testing Method
+        val button: Button = findViewById(R.id.button)
+
+        // Set up a click listener for the button
+        button.setOnClickListener {
+            Log.v("Tag", "Click")
+            searchMovieApi("Fast",1)
+        }
+
+
+
+
 
     }
 
     // Listening for any live data changes - observing
-    private fun observeAnyChange() {
-        movieListViewModel.movies.observe(this, Observer<List<MovieModel>> { movieModels ->
-            // Observing any data Change
+    // Observing any data changes
+    private fun ObserveAnyChange() {
+        movieListViewModel.movies.observe(this, Observer { movieModels ->
+            // Observing for any data change
+            movieModels?.forEach { movieModel ->
+                // Get the data in log
+                Log.v("Tag", "onChanged: ${movieModel.title}")
+            }
         })
     }
 
+    //Call in Main Activity
+    private fun searchMovieApi(query: String, pageNumber: Int){
+        movieListViewModel.searchMovieApi(query,pageNumber)
+    }
+
+
+
+
+
+
+
+
+    /*
     private fun GetRetrofitResponse() {
         // Creating an instance of the Servicey class to get the MovieApi
         val servicey = Servicey()
@@ -109,6 +136,7 @@ class MovieListActiviti : AppCompatActivity() {
             }
         })
     }
+    */
 
 }
 
