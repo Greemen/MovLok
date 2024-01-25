@@ -1,20 +1,17 @@
 package com.example.movlok.viewmodels
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.movlok.models.MovieModel
+import com.example.movlok.repositories.MovieRepository
 
-class MovieListViewModel: ViewModel() {
-    // This class is used for VIEWMODEL
+class MovieListViewModel : ViewModel() {
+    // This class is used for ViewModel
 
-    // Live data
-    private val mMovies = MutableLiveData<List<MovieModel>>()
+    // Repository instance
+    private val movieRepository = MovieRepository.getInstance()
 
-    // If you need to expose mMovies as LiveData:
-    fun getMovies(): LiveData<List<MovieModel>> {
-        return mMovies
-    }
-
-
+    // Public LiveData, exposed as read-only
+    val movies: LiveData<List<MovieModel>>
+        get() = movieRepository.movies
 }
