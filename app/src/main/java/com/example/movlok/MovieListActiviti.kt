@@ -29,7 +29,7 @@ class MovieListActiviti : AppCompatActivity() {
         // Set up a click listener for the button
         button.setOnClickListener {
             Log.v("Tag", "Click")
-            searchMovieApi("Fast",1)
+            searchMovieApi("Fast",2)
         }
 
 
